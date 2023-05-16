@@ -1,23 +1,33 @@
 import logo from './logo.svg';
 import './App.css';
+import List from './components/ItemList';
+import Input from './components/Add';
+import Filter from './components/Filter';
+import { useState } from 'react';
 
 function App() {
+  let [todoArray, setArray] = useState([
+    { id: 1, name: "test", status: true },
+  ]);
+  let [FilterValue, setFilter] = useState("");
+
+  let getValue = (input) => {
+    const newItem = {
+      id: todoArray.length + 1,
+      name: input,
+      status: false
+    }
+    setArray(prevArray => [...prevArray, (newItem)]);
+  }
+  let getFilter = (filter) => {
+    setFilter(filter);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Input passFunc={getValue} />
+      <Filter passFunc={getFilter} />
+      <List array={todoArray} filter={FilterValue}/>
     </div>
   );
 }
