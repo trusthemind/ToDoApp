@@ -22,12 +22,17 @@ function App() {
   let getFilter = (filter) => {
     setFilter(filter);
   }
+  let getStatus = (id) => {
+    let index = todoArray.findIndex((item) => item.id === id);
+    let newItem = { ...todoArray[index], status: !todoArray[index].status }
+    setArray([...todoArray.slice(0, index), newItem, ...todoArray.slice(index + 1)])
+  }
 
   return (
     <div className="App">
       <Input passFunc={getValue} />
       <Filter passFunc={getFilter} />
-      <List array={todoArray} filter={FilterValue}/>
+      <List array={todoArray} filter={FilterValue} passStatus={getStatus} />
     </div>
   );
 }

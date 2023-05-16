@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
-function Item({ item}) {
+function Item({ item, passStatus}) {
   let [status, setStatus] = useState(item.status);
   let changeStatus = () => {
-    setStatus(!status);
+    passStatus(item.id)
   };
-  const itemStyle = {textDecoration: status ? "line-through" : "none"};
+  const itemStyle = {textDecoration: item.status ? "line-through" : "none"};
 
   return (
     <li style={itemStyle} onClick={changeStatus}>{item.name}</li>

@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Filter({ passFunc }) {
+  let [filterValue, setFilter] = useState("All");
   const selectChange = (e) => {
-    const selectedValue = e.target.value;
-    passFunc(selectedValue);
+    setFilter(e.target.value);
+    passFunc(filterValue);
   };
 
   return (
-    <select onChange={selectChange}>
+    <select onChange={selectChange} value={filterValue}>
       <option value="All">All</option>
       <option value="Completed">Completed</option>
       <option value="Uncompleted">Uncompleted</option>
